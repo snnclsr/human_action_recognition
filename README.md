@@ -1,8 +1,6 @@
 ## Human Action Recognition using Deep Learning (Demo Project)
 
-In this project, we developed human action recognition system using deep learning. You can check our final models evaluation from video below.
-
-
+In this project, we developed human action recognition system using deep learning. You can check our final model's evaluation from video below.
 
 ![VIDEO WILL BE HERE!]()
 
@@ -10,7 +8,9 @@ The dataset can be found [here](http://www.nada.kth.se/cvap/actions/). We used t
 
 Code is seperated into three parts.
 
-`create_data.py`:
+`create_data.py`: In this function, we create the training data from the original dataset.
+
+- `toMH()`: This function takes the `filename`, lines in sequences file which includes `filename`, the current person's number and file number as an argument. **The first line where the assignment to video_src should be fixed. We manually assign the filename to handclapping_frames.**
 
 `motion_history.py`: In this function, we start the camera and capture frames using OpenCV. We define possible actions and load the model from `args.model_dir`. For motion_history, we
 

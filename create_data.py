@@ -7,7 +7,7 @@ You have to use fixed length pattern for image sequence, such as ./images/exampl
 """
 
 import sys
-import os.path as osp
+import argparse
 
 import numpy as np
 import cv2
@@ -16,27 +16,19 @@ import re
 MHI_DURATION = 30
 DEFAULT_THRESHOLD = 32
 
-np
 
+def toMH(filename, lines, personnum, filenum):
 
-def toMH(lines, personnum, filenum):
-
+  # This should be fixed. :)
   video_src = './handclapping_frames/' + lines[((personnum - 1) * 4) + filenum - 1][0] + '_uncomp/frame%d.jpg'
   print(video_src)
-  cv2.namedWindow('motion-history')
-  cv2.namedWindow('raw')
-  cv2.moveWindow('raw', 200, 0)
 
   i = 0
   while i < 1:
-
     i += 1
     cam = cv2.VideoCapture(video_src)
-
     ret, frame = cam.read()
-
     h, w = frame.shape[:2]
-
     prev_frame = frame.copy()
     motion_history = np.zeros((h, w), np.float32)
     timestamp = 0
@@ -56,23 +48,17 @@ def toMH(lines, personnum, filenum):
 
       # normalize motion history
       mh = np.uint8(np.clip((motion_history - (timestamp - MHI_DURATION)) / MHI_DURATION, 0, 1) * 255)
-      cv2.imshow('motempl', mh)
-      cv2.imshow('raw', frame)
       try:
 
         if j == int(lines[((personnum - 1) * 4) + filenum - 1][3]):
 
-          cv2.imwrite('handclap/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
-          cv2.imshow('motion-history', mh)
+          cv2.imwrite(f'{filename}/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
         if j == int(lines[((personnum - 1) * 4) + filenum - 1][5]):
-          cv2.imwrite('handclap/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
-          cv2.imshow('motion-history', mh)
+          cv2.imwrite(f'{filename}/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
         if j == int(lines[((personnum - 1) * 4) + filenum - 1][7]):
-          cv2.imwrite('handclap/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
-          cv2.imshow('motion-history', mh)
+          cv2.imwrite(f'{filename}/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
         if j == int(lines[((personnum - 1) * 4) + filenum - 1][9]) - 1:
-          cv2.imwrite('handclap/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
-          cv2.imshow('motion-history', mh)
+          cv2.imwrite(f'{filename}/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png', mh)
 
       except:
         print("ATLANDI : " + 'box/' + str(personnum) + '_d' + str(filenum) + "_" + str(j) + '.png')
@@ -87,14 +73,20 @@ def toMH(lines, personnum, filenum):
 
 
 def main():
-  fh = open('sequences.txt')
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument("filename")
+  args = parser.parse_args()
+
+  sequences_file = "sequences.txt"
+  fh = open(sequences_file)
 
   lines = []
   for line in fh:
     line = line.strip('\n')
     line = re.split(' |,|\t|-', line)
     line = list(filter(None, line))
-    if any("handclapping" in s for s in line):
+    if any(args.filename in s for s in line):
       lines.append(line)
 
   lines = list(filter(None, lines))
@@ -102,7 +94,7 @@ def main():
 
   for personnum in range(1, 26):
     for filenum in range(1, 5):
-      toMH(lines, personnum, filenum)
+      toMH(args.filename, lines, personnum, filenum)
 
 
 if __name__ == "__main__":
