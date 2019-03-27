@@ -7,6 +7,7 @@ import cv2
 
 from keras.models import Sequential
 from keras.layers import Conv2D, Flatten, Dense, MaxPool2D
+from keras.utils import plot_model
 
 
 def read_images(img_dir, img_size):
@@ -15,16 +16,16 @@ def read_images(img_dir, img_size):
     # Recursively looking to the subdirectories of "img_dir"
     # This is the example of the expected file directory.
     # 1
-    # 	 img1.png
-    # 	 img2.png
-    # 	   ...
+    #    img1.png
+    #    img2.png
+    #      ...
     # 2
-    # 	 img1.png
-    # 	 img2.png
+    #    img1.png
+    #    img2.png
     #      ...
     # 3
-    # 	 img1.png
-    # 	 img2.png
+    #    img1.png
+    #    img2.png
     #      ...
     ################################################################
 
@@ -116,6 +117,10 @@ def main():
     model = get_model(input_shape, output_shape)
 
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    print(model.summary())
+    plot_model(model, to_file="model.png")
+
     history = model.fit(imgs, y, epochs=args.epochs, validation_split=args.val_split, shuffle=True)
 
     model_name_f = args.model_name + ".h5"
