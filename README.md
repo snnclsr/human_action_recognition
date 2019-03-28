@@ -12,7 +12,7 @@ Code is seperated into three parts.
 
 - `toMH()`: This function takes the `filename`, lines in sequences file which includes `filename`, the current person's number and file number as an argument. **The first line where the assignment to video_src should be fixed. We manually assign the filename to handclapping_frames.**
 
-`motion_history.py`: In this function, we start the camera and capture frames using OpenCV. We define possible actions and load the model from `args.model_dir`. For motion_history, we
+`motion_history.py`: In this function, we start the camera and capture frames using OpenCV. We define possible actions and load the model from `args.model_dir`. The main flow of the program:
 
 * Calculate the absoulute difference between current and previous frames using `cv2.absdiff()`.
 * Convert the absolute difference between frames to grayscale frame/image using `cv2.cvtColor()`.
