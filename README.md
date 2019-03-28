@@ -33,3 +33,13 @@ Code is seperated into three parts.
 - `get_model`: we define the neural network architecture in this function. Model can be seen [here]().
 
 
+
+After downloading the dataset, how to run files:
+
+1. First of all, we should create the training dataset from the original data. For example, to create handclapping data:
+`python create_data.py handclapping`
+
+2. After creating the dataset, we should train our model. To do that:
+`python train_data.py images` -- here images should be the output of `create_data.py` file.
+
+
