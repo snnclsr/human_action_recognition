@@ -1,5 +1,7 @@
 ## Human Action Recognition using Deep Learning (Demo Project)
 
+Contributors of this project: [Abdulkadir Yapıcı](https://github.com/AbdulkadirYapici), [Batuhan Meseci](https://github.com/batuhanmeseci), [Murat Acar](https://github.com/acar-murat), [Riza Bocoglu](https://github.com/riza055)
+
 In this project, we developed human action recognition system using deep learning. You can check our final model's evaluation from video below.
 
 [![Youtube Video](http://img.youtube.com/vi/6F9HAGn3OsQ/0.jpg)](http://www.youtube.com/watch?v=6F9HAGn3OsQ)
@@ -33,13 +35,13 @@ Code is seperated into three parts.
 - `get_model`: we define the neural network architecture in this function. Model can be seen [here]().
 
 
-
 After downloading the dataset, how to run files:
 
 1. First of all, we should create the training dataset from the original data. For example, to create handclapping data:
-`python create_data.py handclapping`
+`python create_data.py handclapping`:
 
 2. After creating the dataset, we should train our model. To do that:
-`python train_data.py images` -- here images should be the output of `create_data.py` file.
+`python train_data.py images` --> here images should be the output of `create_data.py` file. There are some additional parameters which are `model_name`: name of the model, `epochs`: number of epochs to train the model, `val_split`: validation split for training data and `plot_data`: if exists, plotting the randomly selected 20 image from the dataset. 
 
-
+3. Evaluation of the trained model: 
+`python motion_history.py model_dir`: here `model_dir` is trained model's file.
