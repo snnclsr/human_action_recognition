@@ -2,9 +2,7 @@
 
 In this project, we developed human action recognition system using deep learning. You can check our final model's evaluation from video below.
 
-![VIDEO WILL BE HERE!](https://www.youtube.com/watch?v=6F9HAGn3OsQ&feature=youtu.be)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6F9HAGn3OsQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+![Youtube Video](http://img.youtube.com/vi/6F9HAGn3OsQ/0.jpg)](http://www.youtube.com/watch?v=6F9HAGn3OsQ)
 
 The dataset can be found [here](http://www.nada.kth.se/cvap/actions/). We used three actions from dataset which are hand waving, boxing, movement. We also created our own data which is no movement dataset which includes mostly black images.
 
