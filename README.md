@@ -45,3 +45,6 @@ After downloading the dataset, how to run files:
 
 3. Evaluation of the trained model: 
 `python motion_history.py model_dir`: here `model_dir` is trained model's file.
+
+![Architecture of the Model](https://github.com/snnclsr/human_action_recognition/blob/master/model.png)
+
